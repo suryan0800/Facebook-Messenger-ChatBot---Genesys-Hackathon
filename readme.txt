@@ -2,6 +2,12 @@ Facebook Messenger ChatBot Link:
 
 https://m.me/107058280888966?ref=Welcome%20Message
 
+Tech Stack:
+  Facebook Messenger
+  ChatFuel
+  Zapier
+  Python
+
 Sample inputs : 
 “Can I play games in my Acer predator helios?”
 “Can I upgrade ram in my acer chromebook?”
