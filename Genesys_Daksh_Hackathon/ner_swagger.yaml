@@ -1,0 +1,230 @@
+swagger: '2.0'
+host: 'localhost'
+basePath: '/api/v1/'
+paths:
+  /list_tags:
+    get:
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/List%20Tags%20Output'
+      operationId: get_list_tags_resource
+      tags:
+        - pii-ner
+  /resolve:
+    post:
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Resolution%20Output'
+      operationId: post_resolve_resource
+      parameters:
+        - name: payload
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/Resolution%20Input'
+        - name: X-Fields
+          in: header
+          type: string
+          format: mask
+          description: An optional fields mask
+      tags:
+        - pii-ner
+info:
+  title: PII/NER Api
+  version: '1.0'
+  description: |-
+    Service for named entity resolition and masking PII
+
+    Disclaimer:  This demo is not intended for production use. Do not use this system on sensitive data. 
+produces:
+  - application/json
+consumes:
+  - application/json
+tags:
+  - name: pii-ner
+    description: pii-ner
+definitions:
+  List Tags Output:
+    required:
+      - bilstm_tags
+      - language
+      - tags
+    properties:
+      language:
+        type: string
+        description: Language for which the supported builtin tags are fetched
+        example: en-US
+      tags:
+        type: array
+        example:
+          - PRICE
+          - DATE
+          - TIME_APPROX
+          - TIME
+          - ORG
+          - GEO
+          - DATE_REL
+          - PERSON
+          - DIGIT
+          - Misc
+          - URL
+          - ZIPCODE
+          - EMAIL
+          - CARD_NUMBER
+          - PHONE_NUMBER
+          - SSN
+        items:
+          type: string
+          description: All the supported Entities by the system
+          example: GEO
+      bilstm_tags:
+        type: array
+        example:
+          - PRICE
+          - DATE
+          - TIME_APPROX
+          - TIME
+          - ORG
+          - GEO
+          - DATE_REL
+          - PERSON
+        items:
+          type: string
+          description: Entities supported by the builtin probabilitic model
+          example: GEO
+    type: object
+  Resolution Input:
+    required:
+      - text
+    properties:
+      text:
+        type: string
+        description: Input Text from which entities need to be detected
+        example: My name is Tony Bates and I work for Genesys
+      expected_tags:
+        type: array
+        description: List of expected entities within the input text
+        example:
+          - ORG
+          - PERSON
+        items:
+          type: string
+          description: List of expected entities within the input text
+    type: object
+  Resolution Output:
+    required:
+      - masked
+      - resolved_result
+      - result_with_probabilities
+      - task_id
+    properties:
+      task_id:
+        type: string
+        description: Task id that uniquely identifies an instance of input given to this endpoint
+        example: e792ae7f-2223-4926-b022-3b8f32253be8
+      result_with_probabilities:
+        type: object
+        description: Word-wise entity tagging with confidence and word boundary information
+        example:
+          - start_idx: 0
+            end_idx: 2
+            tag: O
+            confidence: 0.9995812773704529
+            index: 0
+            word: My
+          - start_idx: 3
+            end_idx: 7
+            tag: O
+            confidence: 0.9999852180480957
+            index: 1
+            word: name
+          - start_idx: 8
+            end_idx: 10
+            tag: O
+            confidence: 0.9992282390594482
+            index: 2
+            word: is
+          - start_idx: 11
+            end_idx: 15
+            tag: PERSON
+            confidence: 0.7156535387039185
+            index: 3
+            word: Tony
+          - start_idx: 16
+            end_idx: 21
+            tag: PERSON
+            confidence: 0.9013516902923584
+            index: 4
+            word: Bates
+          - start_idx: 22
+            end_idx: 25
+            tag: O
+            confidence: 0.9998968839645386
+            index: 5
+            word: and
+          - start_idx: 26
+            end_idx: 27
+            tag: O
+            confidence: 0.9938077330589294
+            index: 6
+            word: I
+          - start_idx: 28
+            end_idx: 32
+            tag: O
+            confidence: 0.9968036413192749
+            index: 7
+            word: work
+          - start_idx: 33
+            end_idx: 36
+            tag: O
+            confidence: 0.9826592206954956
+            index: 8
+            word: for
+          - start_idx: 37
+            end_idx: 44
+            tag: ORG
+            confidence: 0.9945433139801025
+            index: 9
+            word: Genesys
+      masked:
+        type: string
+        description: Masked output of the input text
+        example: My name is <PERSON> <PERSON> and i work for <ORG>
+      resolved_result:
+        type: object
+        description: Entity wise grouping of input text words along with confidence and combined word boundaries
+        example:
+          - text: My name is
+            start: 0
+            end: 10
+            value: null
+            tag: O
+            confidence: 0.9995982448259989
+          - text: Tony Bates
+            start: 11
+            end: 21
+            value: null
+            tag: PERSON
+            confidence: 0.8085026144981384
+          - text: and I work for
+            start: 22
+            end: 36
+            value: null
+            tag: O
+            confidence: 0.9932918697595596
+          - text: Genesys
+            start: 37
+            end: 44
+            value: null
+            tag: ORG
+            confidence: 0.9945433139801025
+    type: object
+responses:
+  ParseError:
+    description: When a mask can't be parsed
+  MaskError:
+    description: When any error occurs on mask

@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "60ccbf5b-cf1c-4d13-af41-bf50d2556a4a",
+		"name": "KSS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Generate access token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c9e3178-b6c6-4f63-ad29-404bbd49ba35",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{auth_url}}/oauth/token",
+							"host": [
+								"{{auth_url}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						},
+						"description": "Using Client Id and Client secret, generate access token and use it for Authentication in all request headers."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kbs",
+			"item": [
+				{
+					"name": "Create KnowledgeBase",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "48d1c96a-6d2f-44a5-a8d8-02de37c61477",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"kbId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"dialog engine KB\",\n\t\"description\" : \"Knowledge base for Dialog Engine\",\n\t\"coreLanguage\" : \"en-US\"\n}"
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases"
+							]
+						},
+						"description": "Create a knowledge base and get id (kbId)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get the details of specific KnowledgeBase",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}"
+							]
+						},
+						"description": "Get the details of specific KnowledgeBase"
+					},
+					"response": []
+				},
+				{
+					"name": "Get the list of KnowledgeBases with details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb4139ef-d6cb-428c-a775-cd05c7e69ec9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases"
+							]
+						},
+						"description": "Get the list of KnowledgeBases with details so far created"
+					},
+					"response": []
+				},
+				{
+					"name": "Update KnowledgeBase information",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"updated dialog engine kb\",\r\n  \"description\": \"updated Knowledge base for Dialog Engine, best one in the world\",\r\n  \"coreLanguage\": \"en-US\"\r\n}"
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}"
+							]
+						},
+						"description": "If any update in knowledge base details, pass it through body and update it"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Knowledge Base",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": " {{orgId}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}"
+							]
+						},
+						"description": "Deletes a Knowledge base"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "documents",
+			"item": [
+				{
+					"name": "Create document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "389eaec4-a74a-43f8-968d-9691777817ec",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"documentId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"Faq\",\n  \"faq\": {\n    \"question\": \"whqt is the rate for the home loan for 15 years\",\n    \"answer\": \"the rate for home loan for 10 years can be too high and you might have to shell out double money within 5 years, be careful!!\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/{{languageCode}}/documents",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"{{languageCode}}",
+								"documents"
+							]
+						},
+						"description": "Create single FAQ document"
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk upload documents",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \" When do I receive the hard copy of the offer letter?\",\n                \"answer\": \"The hard copy of the offer letter is issued on the day of joining with Genesys. You will be required to attend the HR Orientation post which the offer letter will be issued.\"\n            }\n        },\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \"Can I go ahead with the exit formalities on the basis of the offer letter soft copy given to me?\",\n                \"answer\": \"You can initiate the exit formalities upon receiving the soft copy of your offer letter.  \"\n            }\n        },\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \" If I am unable to join on the date mentioned in the offer letter, will I receive another letter with my revised date of joining ?\",\n                \"answer\": \"It is important you stay connected with the Recruiter / HR SPOC and keep them apprised of any changes in date of joining. The hard copy of the offer letter will have the right DOJ and will be issued post HR orientation on Day One.\"\n            }\n        },\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \"Where and at what time do I report on my date of joining? \",\n                \"answer\": \" For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM \"\n            }\n        },\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \"Can I join Genesys on any day in the date of joining week ?\",\n                \"answer\": \"The joining formalities at Genesys takes place only on Monday & Wednesday every week. Therefore, your date of joining can be any one of these days. Please keep your Recruiter / HR informed about this in advance. \"\n            }\n        },\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \"What is the Dress Code Policy ?\",\n                \"answer\": \"We encourage smart business casuals & shoes for men & appropriate footwear for women. The company maintains a professional working environment. All employees should use discretion in wearing attire that is appropriate for the office and when meeting with customers and business contacts. Do not wear anything that other employees might find offensive or that might make co-workers uncomfortable. This includes clothing with profane language statements or clothing that promotes causes that include, but are not limited to, politics, religion, sexuality, race, age, gender, and ethnicity.\"\n            }\n        },\n        {\n            \"type\": \"Faq\",\n            \"faq\": {\n                \"question\": \"What are the documents that I have to bring along on the joining date ?\",\n                \"answer\": \"You will have to carry the following documents (Xerox and Three sets of photocopies) with you on the date of joining: Three Passport Size Photographs (With White Background), Academic certificates: X standard, XII Standard, Diploma, Under-Graduation, Post-Graduation, Others, Any Other Merit Certificate, Copy of Identity Proof (Passport, Aadhar Card & Pan Card) and Cancelled Cheque Xerox, Resignation acceptance letter/ Relieving Letter from Previous Employer, Experience Certificate from Previous Employers, Certificate of Last Drawn Salary/ Pay Slips. \"\n            }\n        }\n]"
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/{{languageCode}}/documents",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"{{languageCode}}",
+								"documents"
+							]
+						},
+						"description": "Add more documents to knowledge Base in single request"
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific document",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/{{languageCode}}/documents/{{documentId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"{{languageCode}}",
+								"documents",
+								"{{documentId}}"
+							]
+						},
+						"description": "Get specific document"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all documents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/{{languageCode}}/documents",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"{{languageCode}}",
+								"documents"
+							]
+						},
+						"description": "Get all documents"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete document",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": " {{orgId}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/{{languageCode}}/documents/{{documentId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"{{languageCode}}",
+								"documents",
+								"{{documentId}}"
+							]
+						},
+						"description": "Delete document"
+					},
+					"response": []
+				},
+				{
+					"name": "Update document",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": " {{orgId}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"Faq\",\r\n  \"faq\": {\r\n    \"question\": \"When is the best time to watch a movie?\",\r\n    \"answer\": \"At summer where you can enjoy air conditioning\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/{{languageCode}}/documents/{{documentId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"{{languageCode}}",
+								"documents",
+								"{{documentId}}"
+							]
+						},
+						"description": "Update document with changes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "train_search",
+			"item": [
+				{
+					"name": "Train a model",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29ebe763-997c-4252-b08d-bcce9165c319",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"trainingId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/en-US/trainings",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"en-US",
+								"trainings"
+							]
+						},
+						"description": "Start training a model  and get training id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get training",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/en-US/trainings/{{trainingId}}",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"en-US",
+								"trainings",
+								"{{trainingId}}"
+							]
+						},
+						"description": "Get a specific training and status of training (Queued, In Progress, succeeded). if Succeeded only, the knowledge base will be used for search."
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/languages/en-US/trainings",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"languages",
+								"en-US",
+								"trainings"
+							]
+						},
+						"description": "Gets all trainings for a particular KB"
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "organizationId",
+								"value": "{{orgId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"joining\",\n  \"pageSize\": 4,\n  \"pageNumber\": 1,\n  \"languageCode\":\"en-US\",\n  \"documentType\": \"Faq\",\n  \"searchOnDraftDocuments\": \"True\"\n}"
+						},
+						"url": {
+							"raw": "{{kss_url}}/knowledgebases/{{kbId}}/search",
+							"host": [
+								"{{kss_url}}"
+							],
+							"path": [
+								"knowledgebases",
+								"{{kbId}}",
+								"search"
+							]
+						},
+						"description": "Searches for FAQ from the trained Knowledge base"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

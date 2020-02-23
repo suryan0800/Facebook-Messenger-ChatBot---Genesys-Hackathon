@@ -1,0 +1,3562 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Knowledge APIs
+  description: ''
+  contact: {}
+host: localhost
+basePath: /api/v2
+securityDefinitions:
+  auth:
+    type: basic
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /:
+    post:
+      summary: get access token from client
+      tags:
+        - authentication
+      operationId: getaccesstokenfromclient
+      deprecated: false
+      produces:
+        - application/json
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: grant_type
+          in: formData
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/logintokenresponse'
+          examples:
+            application/json:
+              access_token: >-
+                rm2ud6IVqSVQBz3UPdzmpu6FUMTbf4RZX-Jbe31zxHlkddanqsBvRBj50g1yl18bBTZCaXsXULCuoZa_GNGwDw
+              token_type: bearer
+              expires_in: 86399
+          headers:
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '147'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 05:25:28 GMT'
+            inin-correlation-id:
+              type: string
+              default: 50426196-a8f0-45e7-7751-75d144a441dd
+            strict-transport-security:
+              type: string
+              default: max-age=7776000
+            vary:
+              type: string
+              default: Accept-Encoding
+  /knowledgebases:
+    post:
+      description: creating a knowledgebase
+      summary: Create knowledgebase
+      tags:
+        - knowledgebase
+      operationId: Createknowledgebase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgebaseRequest'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgeBase'
+          examples:
+            application/json:
+              id: 95fa6482-5356-41f1-98b3-a355e7367a7e
+              name: Genesys HR Joining bot
+              description: FAQs related to Joining formalities at Genesys
+              coreLanguage: en-US
+              dateCreated: '2020-01-23T04:30:33.479Z'
+              dateModified: '2020-01-23T04:30:33.479Z'
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/95fa6482-5356-41f1-98b3-a355e7367a7e
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '328'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:30:33 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: c0795342-f6b2-4ce6-a44c-49c367b06c8a
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '1'
+            inin-ratelimit-reset:
+              type: string
+              default: '60'
+            location:
+              type: string
+              default: >-
+                https://apps.inintca.com:443/api/v2/knowledge/knowledgebases/95fa6482-5356-41f1-98b3-a355e7367a7e
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 613faec4b883bfe2ebdd8a74d5006f4c.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: nNAzsKGDbqV5YzdIjg7-ozRHABgyMl_IxefTNwzbvBNtztiFRNKsaQ==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    get:
+      summary: Get List of Knowledgebases
+      tags:
+        - knowledgebase
+      operationId: GetListofKnowledgebases
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetListofKnowledgebasesResponse'
+          examples:
+            application/json:
+              entities:
+                - id: 759aab60-669a-46d8-9965-1acd7c0929f5
+                  name: Genesys HR Joining bot
+                  description: FAQs related to Joining formalities at Genesys
+                  coreLanguage: en-US
+                  dateCreated: '2020-01-13T09:32:32.77Z'
+                  dateModified: '2020-01-13T09:32:32.77Z'
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/759aab60-669a-46d8-9965-1acd7c0929f5
+                - id: 3ab87858-6416-4df5-8a59-c0139d5f5b34
+                  name: Genesys HR relocation policies
+                  description: FAQs related to relocation policies
+                  coreLanguage: en-US
+                  dateCreated: '2020-01-14T08:22:43.273Z'
+                  dateModified: '2020-01-14T08:22:43.273Z'
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/3ab87858-6416-4df5-8a59-c0139d5f5b34
+              nextUri: >-
+                api/v2/knowledge/knowledgebases?after=3334d254-3e42-4978-971f-d67a302850d4&limit=null
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '3222'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:34:25 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: a6030f4a-85a6-4262-a1a5-fb80f63754d1
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '2'
+            inin-ratelimit-reset:
+              type: string
+              default: '26'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 613faec4b883bfe2ebdd8a74d5006f4c.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: H5AKBcH2HgheQIIPWAfdy5yGnW4x58X9GD0KfSOkLic_5fcCkJLu4g==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+  /knowledgebases/{KnowledgeBaseID}:
+    get:
+      description: Get single knowledgebase for a corresponding Id
+      summary: Get knowledgebase
+      tags:
+        - knowledgebase
+      operationId: Getknowledgebase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgeBase'
+          examples:
+            application/json:
+              id: 95fa6482-5356-41f1-98b3-a355e7367a7e
+              name: Genesys HR Joining bot
+              description: FAQs related to Joining formalities at Genesys
+              coreLanguage: en-US
+              dateCreated: '2020-01-23T04:30:33.479Z'
+              dateModified: '2020-01-23T04:30:33.479Z'
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/95fa6482-5356-41f1-98b3-a355e7367a7e
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '328'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:33:53 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 3bc970e8-7f9b-453d-9f2b-6e8fcd791498
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '1'
+            inin-ratelimit-reset:
+              type: string
+              default: '60'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 613faec4b883bfe2ebdd8a74d5006f4c.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: uuD5e7WmIF57m6p0Z2Cv_jsTiQ8lZJJKeyjMpX5i1dx0ZIEKo-GeCw==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    patch:
+      description: Update knowledge base
+      summary: Update knowledgebase
+      tags:
+        - knowledgebase
+      operationId: UpdateKnowledgebase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgebaseRequest'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgeBase'
+          examples:
+            application/json:
+              id: 95fa6482-5356-41f1-98b3-a355e7367a7e
+              name: Genesys HR Joining bot
+              description: FAQs related to Joining formalities at Genesys
+              coreLanguage: en-US
+              dateCreated: '2020-01-23T04:30:33.479Z'
+              dateModified: '2020-01-23T04:36:52.201Z'
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/95fa6482-5356-41f1-98b3-a355e7367a7e
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '331'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:36:52 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: dc594345-4a62-4b4d-ab57-c55bd30f8991
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '2'
+            inin-ratelimit-reset:
+              type: string
+              default: '40'
+            location:
+              type: string
+              default: >-
+                https://api.inintca.com:443/api/v2/knowledge/knowledgebases/95fa6482-5356-41f1-98b3-a355e7367a7e
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 613faec4b883bfe2ebdd8a74d5006f4c.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: qd6ujEATw7-iGUIz5oZ4dyln6DJjDj1HoLYwn99a9hzjZ-zJt7F3uw==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    delete:
+      description: Deletes a Knowledge base
+      summary: Delete Knowledge Base
+      tags:
+        - knowledgebase
+      operationId: DeleteKnowledgeBase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+      responses:
+        '204':
+          description: ''
+          schema:
+            type: object
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:41:13 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 868fdf5e-45d1-42db-8662-74c47f24231b
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '7'
+            inin-ratelimit-reset:
+              type: string
+              default: '4'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 613faec4b883bfe2ebdd8a74d5006f4c.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: 7LrXZ7mu7RHa2sGBKrg5VmPT9ioclTfz6zHfhv-UfnxPhiz3r4nhig==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+  /knowledgebases/{KnowledgeBaseID}/languages/en-US/documents:
+    post:
+      description: Create Single document
+      summary: Create Single Document
+      tags:
+        - documents
+      operationId: CreateSingleDocument
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/CreateSingleDocumentRequest'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Document'
+          examples:
+            application/json:
+              id: 5119ab61-43cd-4cf1-89dd-2bba78ba0551
+              languageCode: en-US
+              type: Faq
+              faq:
+                question: What is the Dress Code Policy?
+                answer: >-
+                  Usually, you dress in a suit on the weekdays and then fridays
+                  are casual
+                alternatives:
+                  - what are all the dress codes?
+              dateCreated: '2020-01-23T04:44:41.881Z'
+              dateModified: '2020-01-23T04:44:41.902Z'
+              categories: []
+              knowledgeBase:
+                id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                name: Genesys HR Joining bot
+                description: FAQs related to Joining formalities at Genesys
+                coreLanguage: en-US
+                dateCreated: '2020-01-23T04:40:45.992Z'
+                dateModified: '2020-01-23T04:40:45.992Z'
+                selfUri: >-
+                  /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/5119ab61-43cd-4cf1-89dd-2bba78ba0551
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '855'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:44:42 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 2eae992c-3f57-41cf-a9fe-acc2c5cbed79
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '1'
+            inin-ratelimit-reset:
+              type: string
+              default: '60'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 613faec4b883bfe2ebdd8a74d5006f4c.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: BALmabWMVzYEMlc-DTqV3b1_c-DIKs7uYqj8qJ-WiAhDoYiLlqDk2A==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    patch:
+      description: Create Multiple Documents
+      summary: Create Multiple Documents
+      tags:
+        - documents
+      operationId: CreateMulltipleDocuments
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            example:
+              - type: Faq
+                faq:
+                  question: ' When do I receive the hard copy of the offer letter?'
+                  answer: >-
+                    The hard copy of the offer letter is issued on the day of
+                    joining with Genesys. You will be required to attend the HR
+                    Orientation post which the offer letter will be issued.
+              - type: Faq
+                faq:
+                  question: >-
+                    Can I go ahead with the exit formalities on the basis of the
+                    offer letter soft copy given to me?
+                  answer: >-
+                    You can initiate the exit formalities upon receiving the
+                    soft copy of your offer letter.  
+                  alternatives:
+                    - >-
+                      Do I need a hard copy of offer letter to initiate exit
+                      formalities?
+              - type: Faq
+                faq:
+                  question: ' If I am unable to join on the date mentioned in the offer letter, will I receive another letter with my revised date of joining ?'
+                  answer: >-
+                    It is important you stay connected with the Recruiter / HR
+                    SPOC and keep them apprised of any changes in date of
+                    joining. The hard copy of the offer letter will have the
+                    right DOJ and will be issued post HR orientation on Day One.
+                  alternatives:
+                    - ' Will my offer letter have new or old date of joining ?'
+              - type: Faq
+                faq:
+                  question: 'Where and at what time do I report on my date of joining? '
+                  answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+                  alternatives:
+                    - ' Where should I report on date of joining for Mumbai Office ?'
+              - type: Faq
+                faq:
+                  question: Can I join Genesys on any day in the date of joining week ?
+                  answer: >-
+                    The joining formalities at Genesys takes place only on
+                    Monday & Wednesday every week. Therefore, your date of
+                    joining can be any one of these days. Please keep your
+                    Recruiter / HR informed about this in advance. 
+                  alternatives:
+                    - ' Can I have my day of joining on a friday ? '
+              - type: Faq
+                faq:
+                  question: What is the Dress Code Policy ?
+                  answer: >-
+                    We encourage smart business casuals & shoes for men &
+                    appropriate footwear for women. The company maintains a
+                    professional working environment. All employees should use
+                    discretion in wearing attire that is appropriate for the
+                    office and when meeting with customers and business
+                    contacts. Do not wear anything that other employees might
+                    find offensive or that might make co-workers uncomfortable.
+                    This includes clothing with profane language statements or
+                    clothing that promotes causes that include, but are not
+                    limited to, politics, religion, sexuality, race, age,
+                    gender, and ethnicity.
+                  alternatives:
+                    - ' Are flip flops allowed within the dress code policy ? '
+              - type: Faq
+                faq:
+                  question: >-
+                    What are the documents that I have to bring along on the
+                    joining date ?
+                  answer: >-
+                    You will have to carry the following documents (Xerox and
+                    Three sets of photocopies) with you on the date of joining:
+                    Three Passport Size Photographs (With White Background),
+                    Academic certificates: X standard, XII Standard, Diploma,
+                    Under-Graduation, Post-Graduation, Others, Any Other Merit
+                    Certificate, Copy of Identity Proof (Passport, Aadhar Card &
+                    Pan Card) and Cancelled Cheque Xerox, Resignation acceptance
+                    letter/ Relieving Letter from Previous Employer, Experience
+                    Certificate from Previous Employers, Certificate of Last
+                    Drawn Salary/ Pay Slips. 
+                  alternatives:
+                    - ' Who academic documents do I need on the date of joining ? '
+              - type: Faq
+                faq:
+                  question: >-
+                    Will Genesys provide accommodation facilities if I am
+                    relocating?
+                  answer: >-
+                    We provide initial accommodation for outstation candidates
+                    for a period of one week. This will have to be approved
+                    during the offer discussions with your respective HR. Please
+                    inform your HR well in advance in case you wish to avail the
+                    accommodation facility.
+                  alternatives:
+                    - ' Will I get accommdation if I am from the same city but live far away ? '
+              - type: Faq
+                faq:
+                  question: >-
+                    Is the relieving letter a necessary document on the day of
+                    joining ?
+                  answer: >-
+                    Yes, it is mandatory. In the absence of a relieving letter,
+                    you may carry a hard copy of the resignation acceptance
+                    email from your previous organization mentioning the last
+                    working day approved by the HR. Please ensure that your
+                    relieving date from your previous organization is before the
+                    date you join Genesys. In case of any problems regarding
+                    this, do inform your recruiter at the earliest.  
+                  alternatives:
+                    - ' Is my resignation letter enough on the day of joining ? '
+              - type: Faq
+                faq:
+                  question: ' Can I transfer the amount from my existing PF account to Genesys account? '
+                  answer: >-
+                    This can be done once your Genesys Employee ID is active.
+                    This will be ready within a couple of days of your joining.
+                    Please visit
+                    https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+                    for more details. A request has to be raised & you need to
+                    furnish your existing PF account number to facilitate this. 
+                  alternatives:
+                    - ' Are PF accounts transferrable from old company to Genesys ? '
+              - type: Faq
+                faq:
+                  question: What are the company's official working hours?
+                  answer: >-
+                    All employees are expected to maintain the established
+                    office timings 9.30 am to 6.00 pm (8.5 hours inclusive of
+                    lunch hour). An employee who needs to either come in late or
+                    leave early due to any reason is required to inform and seek
+                    approval of the immediate supervisor at least one day prior
+                    to the same.
+                  alternatives:
+                    - ' Do I need pre approval if I come to work a little later than the working hours ? '
+              - type: Faq
+                faq:
+                  question: When do I receive ID Cards and Access Cards?
+                  answer: >-
+                    This can be done once your Genesys Employee ID is active.
+                    This will be ready within a couple of days of your joining.
+                    Please visit
+                    https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+                    for more details. A request has to be raised & you need to
+                    furnish your existing PF account number to facilitate this. 
+                  alternatives:
+                    - ' Will my access cards be immediately activated ? '
+            type: array
+            items:
+              $ref: '#/definitions/CreateMulltipleDocumentsRequest'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CreateMulltipleDocumentsResponse'
+          examples:
+            application/json:
+              entities:
+                - id: 270cc8eb-91cc-448f-ab67-63818f4cffdf
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: ' When do I receive the hard copy of the offer letter?'
+                    answer: >-
+                      The hard copy of the offer letter is issued on the day of
+                      joining with Genesys. You will be required to attend the
+                      HR Orientation post which the offer letter will be issued.
+                    alternatives: []
+                  dateCreated: '2020-01-23T05:37:55.482Z'
+                  dateModified: '2020-01-23T05:37:55.487Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/270cc8eb-91cc-448f-ab67-63818f4cffdf
+                - id: 4958696b-b752-46bb-accc-ce9ad5a44b1d
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Can I go ahead with the exit formalities on the basis of
+                      the offer letter soft copy given to me?
+                    answer: >-
+                      You can initiate the exit formalities upon receiving the
+                      soft copy of your offer letter.  
+                    alternatives:
+                      - >-
+                        Do I need a hard copy of offer letter to initiate exit
+                        formalities?
+                  dateCreated: '2020-01-23T05:37:55.544Z'
+                  dateModified: '2020-01-23T05:37:55.544Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/4958696b-b752-46bb-accc-ce9ad5a44b1d
+                - id: 2daa5c77-cbbb-4297-bcf8-4b801dceac55
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: ' If I am unable to join on the date mentioned in the offer letter, will I receive another letter with my revised date of joining ?'
+                    answer: >-
+                      It is important you stay connected with the Recruiter / HR
+                      SPOC and keep them apprised of any changes in date of
+                      joining. The hard copy of the offer letter will have the
+                      right DOJ and will be issued post HR orientation on Day
+                      One.
+                    alternatives:
+                      - ' Will my offer letter have new or old date of joining ?'
+                  dateCreated: '2020-01-23T05:37:55.582Z'
+                  dateModified: '2020-01-23T05:37:55.583Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/2daa5c77-cbbb-4297-bcf8-4b801dceac55
+                - id: 2d17889b-2498-4f8f-b0f7-f4bfe8a8c2a4
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: 'Where and at what time do I report on my date of joining? '
+                    answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+                    alternatives:
+                      - ' Where should I report on date of joining for Mumbai Office ?'
+                  dateCreated: '2020-01-23T05:37:55.618Z'
+                  dateModified: '2020-01-23T05:37:55.619Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/2d17889b-2498-4f8f-b0f7-f4bfe8a8c2a4
+                - id: c5949801-67ec-4aeb-95a9-81077ffb1a6f
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Can I join Genesys on any day in the date of joining week
+                      ?
+                    answer: >-
+                      The joining formalities at Genesys takes place only on
+                      Monday & Wednesday every week. Therefore, your date of
+                      joining can be any one of these days. Please keep your
+                      Recruiter / HR informed about this in advance. 
+                    alternatives:
+                      - ' Can I have my day of joining on a friday ? '
+                  dateCreated: '2020-01-23T05:37:55.663Z'
+                  dateModified: '2020-01-23T05:37:55.663Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/c5949801-67ec-4aeb-95a9-81077ffb1a6f
+                - id: 469d959a-de31-4a3b-8fa6-f5f5db202f4c
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: What is the Dress Code Policy ?
+                    answer: >-
+                      We encourage smart business casuals & shoes for men &
+                      appropriate footwear for women. The company maintains a
+                      professional working environment. All employees should use
+                      discretion in wearing attire that is appropriate for the
+                      office and when meeting with customers and business
+                      contacts. Do not wear anything that other employees might
+                      find offensive or that might make co-workers
+                      uncomfortable. This includes clothing with profane
+                      language statements or clothing that promotes causes that
+                      include, but are not limited to, politics, religion,
+                      sexuality, race, age, gender, and ethnicity.
+                    alternatives:
+                      - ' Are flip flops allowed within the dress code policy ? '
+                  dateCreated: '2020-01-23T05:37:55.699Z'
+                  dateModified: '2020-01-23T05:37:55.699Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/469d959a-de31-4a3b-8fa6-f5f5db202f4c
+                - id: d81379e8-9b1b-46d8-ae24-5e8a986927f9
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      What are the documents that I have to bring along on the
+                      joining date ?
+                    answer: >-
+                      You will have to carry the following documents (Xerox and
+                      Three sets of photocopies) with you on the date of
+                      joining: Three Passport Size Photographs (With White
+                      Background), Academic certificates: X standard, XII
+                      Standard, Diploma, Under-Graduation, Post-Graduation,
+                      Others, Any Other Merit Certificate, Copy of Identity
+                      Proof (Passport, Aadhar Card & Pan Card) and Cancelled
+                      Cheque Xerox, Resignation acceptance letter/ Relieving
+                      Letter from Previous Employer, Experience Certificate from
+                      Previous Employers, Certificate of Last Drawn Salary/ Pay
+                      Slips. 
+                    alternatives:
+                      - ' Who academic documents do I need on the date of joining ? '
+                  dateCreated: '2020-01-23T05:37:55.733Z'
+                  dateModified: '2020-01-23T05:37:55.733Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/d81379e8-9b1b-46d8-ae24-5e8a986927f9
+                - id: 6669c444-acb7-4d86-8492-0b3e7c45c0d7
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Will Genesys provide accommodation facilities if I am
+                      relocating?
+                    answer: >-
+                      We provide initial accommodation for outstation candidates
+                      for a period of one week. This will have to be approved
+                      during the offer discussions with your respective HR.
+                      Please inform your HR well in advance in case you wish to
+                      avail the accommodation facility.
+                    alternatives:
+                      - ' Will I get accommdation if I am from the same city but live far away ? '
+                  dateCreated: '2020-01-23T05:37:55.77Z'
+                  dateModified: '2020-01-23T05:37:55.771Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/6669c444-acb7-4d86-8492-0b3e7c45c0d7
+                - id: 490420e7-0144-4ebf-942d-bfbe930292ad
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Is the relieving letter a necessary document on the day of
+                      joining ?
+                    answer: >-
+                      Yes, it is mandatory. In the absence of a relieving
+                      letter, you may carry a hard copy of the resignation
+                      acceptance email from your previous organization
+                      mentioning the last working day approved by the HR. Please
+                      ensure that your relieving date from your previous
+                      organization is before the date you join Genesys. In case
+                      of any problems regarding this, do inform your recruiter
+                      at the earliest.  
+                    alternatives:
+                      - ' Is my resignation letter enough on the day of joining ? '
+                  dateCreated: '2020-01-23T05:37:55.807Z'
+                  dateModified: '2020-01-23T05:37:55.808Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/490420e7-0144-4ebf-942d-bfbe930292ad
+                - id: 863462f7-269d-44b9-a45f-cad6cde70f70
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: ' Can I transfer the amount from my existing PF account to Genesys account? '
+                    answer: >-
+                      This can be done once your Genesys Employee ID is active.
+                      This will be ready within a couple of days of your
+                      joining. Please visit
+                      https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+                      for more details. A request has to be raised & you need to
+                      furnish your existing PF account number to facilitate
+                      this. 
+                    alternatives:
+                      - ' Are PF accounts transferrable from old company to Genesys ? '
+                  dateCreated: '2020-01-23T05:37:55.84Z'
+                  dateModified: '2020-01-23T05:37:55.841Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/863462f7-269d-44b9-a45f-cad6cde70f70
+                - id: ad52b629-6a86-4b5e-a7bf-7b3a6dfc1078
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: What are the company's official working hours?
+                    answer: >-
+                      All employees are expected to maintain the established
+                      office timings 9.30 am to 6.00 pm (8.5 hours inclusive of
+                      lunch hour). An employee who needs to either come in late
+                      or leave early due to any reason is required to inform and
+                      seek approval of the immediate supervisor at least one day
+                      prior to the same.
+                    alternatives:
+                      - ' Do I need pre approval if I come to work a little later than the working hours ? '
+                  dateCreated: '2020-01-23T05:37:55.873Z'
+                  dateModified: '2020-01-23T05:37:55.873Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/ad52b629-6a86-4b5e-a7bf-7b3a6dfc1078
+                - id: dd14755e-95b0-423c-80c5-3f2c8611da5a
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: When do I receive ID Cards and Access Cards?
+                    answer: >-
+                      This can be done once your Genesys Employee ID is active.
+                      This will be ready within a couple of days of your
+                      joining. Please visit
+                      https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+                      for more details. A request has to be raised & you need to
+                      furnish your existing PF account number to facilitate
+                      this. 
+                    alternatives:
+                      - ' Will my access cards be immediately activated ? '
+                  dateCreated: '2020-01-23T05:37:55.907Z'
+                  dateModified: '2020-01-23T05:37:55.908Z'
+                  categories: []
+                  knowledgeBase:
+                    id: {KnowledgeBaseID}
+                    name: dialog engine kb
+                    description: 'Knowledge base for Dialog Engine, best one in the world'
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T05:37:19.001Z'
+                    dateModified: '2020-01-23T05:37:43.54Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/dd14755e-95b0-423c-80c5-3f2c8611da5a
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 05:37:55 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 1a5c920a-ac6d-4ab1-b41d-4aba3d084eb3
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '5'
+            inin-ratelimit-reset:
+              type: string
+              default: '23'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            transfer-encoding:
+              type: string
+              default: chunked
+            via:
+              type: string
+              default: 1.1 4db130e87be66fce9731567ae0669c56.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: YhgeBLrrdNcqaUM79nzw9rzwVfMH7LXz6f9NODooEIdIHrj8GjksjQ==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C3
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    get:
+      description: Get Documents
+      summary: Get Documents
+      tags:
+        - documents
+      operationId: GetDocuments
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetMultipleDocumentsResponse'
+          examples:
+            application/json:
+              entities:
+                - id: f531422c-39dc-42e7-93df-4f9ba68de0c6
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: what is the rate for the home loan for 15 years?
+                    answer: >-
+                      the rate for home loan for 10 years can be too high and
+                      you might have to shell out double money within 5 years,
+                      be careful!!
+                    alternatives:
+                      - home loan for decade and half
+                  dateCreated: '2020-01-23T04:49:46.362Z'
+                  dateModified: '2020-01-23T04:49:46.363Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  externalUrl: 'http://test'
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/f531422c-39dc-42e7-93df-4f9ba68de0c6
+                - id: 80fce4ce-41ba-4413-afef-b7c7eda4c82a
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Will Genesys provide accommodation facilities if I am
+                      relocating?
+                    answer: >-
+                      We provide initial accommodation for outstation candidates
+                      for a period of one week. This will have to be approved
+                      during the offer discussions with your respective HR.
+                      Please inform your HR well in advance in case you wish to
+                      avail the accommodation facility.
+                    alternatives:
+                      - ' Will I get accommdation if I am from the same city but live far away ? '
+                  dateCreated: '2020-01-23T04:45:24.249Z'
+                  dateModified: '2020-01-23T04:45:24.249Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/80fce4ce-41ba-4413-afef-b7c7eda4c82a
+                - id: 4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: 'Where and at what time do I report on my date of joining? '
+                    answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+                    alternatives:
+                      - ' Where should I report on date of joining for Mumbai Office ?'
+                  dateCreated: '2020-01-23T04:45:24.088Z'
+                  dateModified: '2020-01-23T04:45:24.089Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+                - id: 696ea5f4-252b-485e-b8a5-8c0ae0819bb5
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: When do I receive ID Cards and Access Cards?
+                    answer: >-
+                      This can be done once your Genesys Employee ID is active.
+                      This will be ready within a couple of days of your
+                      joining. Please visit
+                      https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+                      for more details. A request has to be raised & you need to
+                      furnish your existing PF account number to facilitate
+                      this. 
+                    alternatives:
+                      - ' Will my access cards be immediately activated ? '
+                  dateCreated: '2020-01-23T04:45:24.388Z'
+                  dateModified: '2020-01-23T04:45:24.389Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/696ea5f4-252b-485e-b8a5-8c0ae0819bb5
+                - id: 5119ab61-43cd-4cf1-89dd-2bba78ba0551
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: What is the Dress Code Policy?
+                    answer: >-
+                      Usually, you dress in a suit on the weekdays and then
+                      fridays are casual
+                    alternatives:
+                      - what are all the dress codes?
+                  dateCreated: '2020-01-23T04:44:41.881Z'
+                  dateModified: '2020-01-23T04:44:41.902Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/5119ab61-43cd-4cf1-89dd-2bba78ba0551
+                - id: 089c1580-54f1-4d06-bf37-bbdabfbd448a
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: What is the Dress Code Policy ?
+                    answer: >-
+                      We encourage smart business casuals & shoes for men &
+                      appropriate footwear for women. The company maintains a
+                      professional working environment. All employees should use
+                      discretion in wearing attire that is appropriate for the
+                      office and when meeting with customers and business
+                      contacts. Do not wear anything that other employees might
+                      find offensive or that might make co-workers
+                      uncomfortable. This includes clothing with profane
+                      language statements or clothing that promotes causes that
+                      include, but are not limited to, politics, religion,
+                      sexuality, race, age, gender, and ethnicity.
+                    alternatives:
+                      - ' Are flip flops allowed within the dress code policy ? '
+                  dateCreated: '2020-01-23T04:45:24.166Z'
+                  dateModified: '2020-01-23T04:45:24.167Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/089c1580-54f1-4d06-bf37-bbdabfbd448a
+                - id: ae09dd43-0db2-4392-a13c-8d73d66e85cf
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      What are the documents that I have to bring along on the
+                      joining date ?
+                    answer: >-
+                      You will have to carry the following documents (Xerox and
+                      Three sets of photocopies) with you on the date of
+                      joining: Three Passport Size Photographs (With White
+                      Background), Academic certificates: X standard, XII
+                      Standard, Diploma, Under-Graduation, Post-Graduation,
+                      Others, Any Other Merit Certificate, Copy of Identity
+                      Proof (Passport, Aadhar Card & Pan Card) and Cancelled
+                      Cheque Xerox, Resignation acceptance letter/ Relieving
+                      Letter from Previous Employer, Experience Certificate from
+                      Previous Employers, Certificate of Last Drawn Salary/ Pay
+                      Slips. 
+                    alternatives:
+                      - ' Who academic documents do I need on the date of joining ? '
+                  dateCreated: '2020-01-23T04:45:24.212Z'
+                  dateModified: '2020-01-23T04:45:24.212Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/ae09dd43-0db2-4392-a13c-8d73d66e85cf
+                - id: ccb06c25-f2af-428c-b72b-5c022c17c874
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: What are the company's official working hours?
+                    answer: >-
+                      All employees are expected to maintain the established
+                      office timings 9.30 am to 6.00 pm (8.5 hours inclusive of
+                      lunch hour). An employee who needs to either come in late
+                      or leave early due to any reason is required to inform and
+                      seek approval of the immediate supervisor at least one day
+                      prior to the same.
+                    alternatives:
+                      - ' Do I need pre approval if I come to work a little later than the working hours ? '
+                  dateCreated: '2020-01-23T04:45:24.35Z'
+                  dateModified: '2020-01-23T04:45:24.35Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/ccb06c25-f2af-428c-b72b-5c022c17c874
+                - id: 505cfaf9-4a80-4979-998e-238aba48213e
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Is the relieving letter a necessary document on the day of
+                      joining ?
+                    answer: >-
+                      Yes, it is mandatory. In the absence of a relieving
+                      letter, you may carry a hard copy of the resignation
+                      acceptance email from your previous organization
+                      mentioning the last working day approved by the HR. Please
+                      ensure that your relieving date from your previous
+                      organization is before the date you join Genesys. In case
+                      of any problems regarding this, do inform your recruiter
+                      at the earliest.  
+                    alternatives:
+                      - ' Is my resignation letter enough on the day of joining ? '
+                  dateCreated: '2020-01-23T04:45:24.281Z'
+                  dateModified: '2020-01-23T04:45:24.281Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/505cfaf9-4a80-4979-998e-238aba48213e
+                - id: fc466eed-7fe7-46fb-b064-d07226b864b5
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Can I join Genesys on any day in the date of joining week
+                      ?
+                    answer: >-
+                      The joining formalities at Genesys takes place only on
+                      Monday & Wednesday every week. Therefore, your date of
+                      joining can be any one of these days. Please keep your
+                      Recruiter / HR informed about this in advance. 
+                    alternatives:
+                      - ' Can I have my day of joining on a friday ? '
+                  dateCreated: '2020-01-23T04:45:24.135Z'
+                  dateModified: '2020-01-23T04:45:24.135Z'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    name: Genesys HR Joining bot
+                    description: FAQs related to Joining formalities at Genesys
+                    coreLanguage: en-US
+                    dateCreated: '2020-01-23T04:40:45.992Z'
+                    dateModified: '2020-01-23T04:40:45.992Z'
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/fc466eed-7fe7-46fb-b064-d07226b864b5
+              nextUri: >-
+                api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents?after=fc466eed-7fe7-46fb-b064-d07226b864b5&limit=null
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:58:09 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: dc79ed64-d15a-417b-901e-7e77dff58b80
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '2'
+            inin-ratelimit-reset:
+              type: string
+              default: '39'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            transfer-encoding:
+              type: string
+              default: chunked
+            via:
+              type: string
+              default: 1.1 9acd372742573b89975d7dceea2dc950.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: Te17wRwnhHScR29NsAEDJdysX236kLK9jDKBsxeSjZcDW3fYJFpSmA==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+  /knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/{DocumentID}:
+    delete:
+      description: Delete Document
+      summary: Delete Document
+      tags:
+        - documents
+      operationId: DeleteDocument
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: DocumentID
+          in: path
+          required: true
+          type: string
+          description: 'Created Document ID'
+      responses:
+        '204':
+          description: ''
+          schema:
+            type: object
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:59:25 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 62821310-4f60-450b-8766-8e05d166e462
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '1'
+            inin-ratelimit-reset:
+              type: string
+              default: '60'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 9acd372742573b89975d7dceea2dc950.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: 6Dc8vfKc-iToGSwzySQklko8PLe_9E6Sv6pBL30Gc8ndbbTRX-z2Qg==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    get:
+      description: Get Single document of corresponding document ID
+      summary: Get Document
+      tags:
+        - documents
+      operationId: GetDocument
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: DocumentID
+          in: path
+          required: true
+          type: string
+          description: 'Created Document ID'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetDocumentResponse'
+          examples:
+            application/json:
+              id: f531422c-39dc-42e7-93df-4f9ba68de0c6
+              languageCode: en-US
+              type: Faq
+              faq:
+                question: what is the rate for the home loan for 15 years?
+                answer: >-
+                  the rate for home loan for 10 years can be too high and you
+                  might have to shell out double money within 5 years, be
+                  careful!!
+                alternatives:
+                  - home loan for decade and half
+              dateCreated: '2020-01-23T04:49:46.362Z'
+              dateModified: '2020-01-23T04:49:46.363Z'
+              categories: []
+              knowledgeBase:
+                id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                name: Genesys HR Joining bot
+                description: FAQs related to Joining formalities at Genesys
+                coreLanguage: en-US
+                dateCreated: '2020-01-23T04:40:45.992Z'
+                dateModified: '2020-01-23T04:40:45.992Z'
+                selfUri: >-
+                  /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+              externalUrl: 'http://test'
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/f531422c-39dc-42e7-93df-4f9ba68de0c6
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '954'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 04:50:26 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: dec53320-edf9-4490-86e0-2499a7262cee
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '2'
+            inin-ratelimit-reset:
+              type: string
+              default: '25'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 32c5b7040885724e78019cc31f0ef3e9.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: TCRvq4hKbPFK_OeqhzWkDhti8CaOOvjSyXrXqAbdBz6oCQEraaZZTg==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+  /knowledgebases/{KnowledgeBaseID}/languages/en-US/trainings:
+    post:
+      description: Trains a model
+      summary: Train Knowledge Base
+      tags:
+        - train
+      operationId: TrainKnowledgeBase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+      responses:
+        '202':
+          description: ''
+          schema:
+            $ref: '#/definitions/TrainKnowledgeBaseResponse'
+          examples:
+            application/json:
+              id: e9034402-6ce3-4e07-a3d7-35dccde9342c
+              dateTriggered: '2020-01-23T05:13:48.313Z'
+              status: Queued
+              languageCode: en-US
+              knowledgeBase:
+                id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                selfUri: >-
+                  /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+              errorMessage: ''
+              knowledgeDocumentsState: Draft
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/trainings/e9034402-6ce3-4e07-a3d7-35dccde9342c
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '470'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 05:12:28 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 52b70b8a-a03c-46bb-8f4b-b2607e9352d1
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '1'
+            inin-ratelimit-reset:
+              type: string
+              default: '60'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 9acd372742573b89975d7dceea2dc950.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: wRVnJFjHiQOmMqOeLaWGG3edIV7WCQLGmAlcMhi6vk9BMKFpqCXxWA==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+    get:
+      description: Gets all trainings for a particular Knowledge Base
+      summary: Get List of trainings Information
+      tags:
+        - train
+      operationId: GetListoftrainingsInformation
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetListoftrainingsInformationResponse'
+          examples:
+            application/json:
+              entities:
+                - id: e9034402-6ce3-4e07-a3d7-35dccde9342c
+                  dateTriggered: '2020-01-23T05:13:48.313Z'
+                  dateCompleted: '2020-01-23T05:24:30.426Z'
+                  status: Succeeded
+                  languageCode: en-US
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  errorMessage: ''
+                  knowledgeDocumentsState: Draft
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/trainings/e9034402-6ce3-4e07-a3d7-35dccde9342c
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '531'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 05:14:24 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: e7bbd512-68a7-47b5-b71b-840945b30702
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '10'
+            inin-ratelimit-reset:
+              type: string
+              default: '6'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 9acd372742573b89975d7dceea2dc950.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: BJrSFLi53yG7vvbWZlvXBOldALggx76lmctUjZwbm9vpG29S70CadQ==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+  /knowledgebases/{KnowledgeBaseID}/languages/en-US/trainings/{TrainingID}:
+    get:
+      description: Get a specific training
+      summary: Get training Information
+      tags:
+        - train
+      operationId: GettrainingInformation
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: TrainingID
+          in: path
+          required: true
+          type: string
+          description: 'Created Training ID'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GettrainingInformationResponse'
+          examples:
+            application/json:
+              id: e9034402-6ce3-4e07-a3d7-35dccde9342c
+              dateTriggered: '2020-01-23T05:13:48.313Z'
+              dateCompleted: '2020-01-23T05:19:48.313Z'
+              status: Succeeded
+              languageCode: en-US
+              knowledgeBase:
+                id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                selfUri: >-
+                  /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+              errorMessage: ''
+              knowledgeDocumentsState: Draft
+              selfUri: >-
+                /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/trainings/e9034402-6ce3-4e07-a3d7-35dccde9342c
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '470'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 05:13:47 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 399d0bc2-59df-4222-8fd5-85e992ec4572
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '7'
+            inin-ratelimit-reset:
+              type: string
+              default: '42'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 9acd372742573b89975d7dceea2dc950.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: DTXMPCujDR0IuffTUhAR42j7ng3tkD1XuBUtx19Ib4B4TZghG1Y5KA==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+  /knowledgebases/{KnowledgeBaseID}/search:
+    post:
+      description: Searching on knowledge base
+      summary: Knowledge Search
+      tags:
+        - search
+      operationId: KnowledgeSearch
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: application/json
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Bearer {{access_token}}'
+        - name: KnowledgeBaseID
+          in: path
+          required: true
+          type: string
+          description: 'Created Knowledge Base ID'
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgeSearchRequest'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/KnowledgeSearchResponse'
+          examples:
+            application/json:
+              total: 4
+              pageCount: 1
+              pageSize: 4
+              pageNumber: 1
+              searchId: 8a14c3d60a364e83bc7cee091c59cd5a
+              results:
+                - id: fc466eed-7fe7-46fb-b064-d07226b864b5
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: >-
+                      Can I join Genesys on any day in the date of joining week
+                      ?
+                    answer: >-
+                      The joining formalities at Genesys takes place only on
+                      Monday & Wednesday every week. Therefore, your date of
+                      joining can be any one of these days. Please keep your
+                      Recruiter / HR informed about this in advance. 
+                    alternatives:
+                      - ' Can I have my day of joining on a friday ? '
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  externalUrl: 'null'
+                  confidence: 0.4579619926816063
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/fc466eed-7fe7-46fb-b064-d07226b864b5
+                - id: 80fce4ce-41ba-4413-afef-b7c7eda4c82a
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: ' When do I receive the hard copy letter?'
+                    answer: >-
+                      The hard copy of the offer letter is issued on the day of
+                      joining with Genesys. You will be required to attend the
+                      HR Orientation post which the offer letter will be issued.
+                    alternatives: []
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  externalUrl: 'null'
+                  confidence: 0.16002965474022351
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/80fce4ce-41ba-4413-afef-b7c7eda4c82a
+                - id: 6b64181c-5370-4c95-8980-5232708eb76e
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: ' If I am unable to join on the date mentioned in the offer letter, will I receive another letter with my revised date of joining ?'
+                    answer: >-
+                      It is important you stay connected with the Recruiter / HR
+                      SPOC and keep them apprised of any changes in date of
+                      joining. The hard copy of the offer letter will have the
+                      right DOJ and will be issued post HR orientation on Day
+                      One.
+                    alternatives:
+                      - ' Will my offer letter have new or old date of joining ?'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  externalUrl: 'null'
+                  confidence: 0.14720733916679613
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/6b64181c-5370-4c95-8980-5232708eb76e
+                - id: 4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+                  languageCode: en-US
+                  type: Faq
+                  faq:
+                    question: 'Where and at what time do I report on my date of joining? '
+                    answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+                    alternatives:
+                      - ' Where should I report on date of joining for Mumbai Office ?'
+                  categories: []
+                  knowledgeBase:
+                    id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                    selfUri: >-
+                      /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+                  externalUrl: 'null'
+                  confidence: 0.13316497521679543
+                  selfUri: >-
+                    /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+          headers:
+            cache-control:
+              type: string
+              default: 'no-cache, no-store, must-revalidate'
+            connection:
+              type: string
+              default: keep-alive
+            content-length:
+              type: string
+              default: '3609'
+            content-type:
+              type: string
+              default: application/json
+            date:
+              type: string
+              default: 'Thu, 23 Jan 2020 05:16:19 GMT'
+            expires:
+              type: string
+              default: '0'
+            inin-correlation-id:
+              type: string
+              default: 89118d90-8b69-4182-b489-a23146dda01a
+            inin-ratelimit-allowed:
+              type: string
+              default: '300'
+            inin-ratelimit-count:
+              type: string
+              default: '1'
+            inin-ratelimit-reset:
+              type: string
+              default: '60'
+            pragma:
+              type: string
+              default: no-cache
+            strict-transport-security:
+              type: string
+              default: max-age=600; includeSubDomains
+            via:
+              type: string
+              default: 1.1 9acd372742573b89975d7dceea2dc950.cloudfront.net (CloudFront)
+            x-amz-cf-id:
+              type: string
+              default: S3VuEW_2xf-51X1el9p1o3ptJ11WzOffnEH5GU5v9ApjAFvrGuq6iA==
+            x-amz-cf-pop:
+              type: string
+              default: IAD89-C2
+            x-cache:
+              type: string
+              default: Miss from cloudfront
+      security: []
+definitions:
+  logintokenresponse:
+    title: logintokenresponse
+    example:
+      access_token: >-
+        rm2ud6IVqSVQBz3UPdzmpu6FUMTbf4RZX-Jbe31zxHlkddanqsBvRBj50g1yl18bBTZCaXsXULCuoZa_GNGwDw
+      token_type: bearer
+      expires_in: 86399
+    type: object
+    properties:
+      access_token:
+        type: string
+      token_type:
+        type: string
+      expires_in:
+        type: integer
+        format: int32
+    required:
+      - access_token
+      - token_type
+      - expires_in
+  GetListofKnowledgebasesResponse:
+    title: GetListofKnowledgebasesResponse
+    example:
+      entities:
+        - id: 759aab60-669a-46d8-9965-1acd7c0929f5
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-13T09:32:32.77Z'
+          dateModified: '2020-01-13T09:32:32.77Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/759aab60-669a-46d8-9965-1acd7c0929f5
+        - id: 3ab87858-6416-4df5-8a59-c0139d5f5b34
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-14T08:22:43.273Z'
+          dateModified: '2020-01-14T08:22:43.273Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/3ab87858-6416-4df5-8a59-c0139d5f5b34
+        - id: 44d376c8-38ed-4328-b264-2c8bec17b286
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-13T09:28:20.405Z'
+          dateModified: '2020-01-13T09:28:20.405Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/44d376c8-38ed-4328-b264-2c8bec17b286
+        - id: bbfb4045-e4dd-4ad0-9fee-f0c0a59210ea
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-20T06:38:15.429Z'
+          dateModified: '2020-01-20T06:38:15.467Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/bbfb4045-e4dd-4ad0-9fee-f0c0a59210ea
+        - id: 95fa6482-5356-41f1-98b3-a355e7367a7e
+          name: Genesys HR Joining bot
+          description: FAQs related to Joining formalities at Genesys
+          coreLanguage: en-US
+          dateCreated: '2020-01-23T04:30:33.479Z'
+          dateModified: '2020-01-23T04:30:33.479Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/95fa6482-5356-41f1-98b3-a355e7367a7e
+        - id: 3d752a43-f58d-4ba8-892e-8641e4a0385e
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-21T06:09:13.404Z'
+          dateModified: '2020-01-21T06:09:13.404Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/3d752a43-f58d-4ba8-892e-8641e4a0385e
+        - id: 054f0b70-56fa-4607-9318-3a97bd70f518
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-13T09:36:43.693Z'
+          dateModified: '2020-01-13T09:36:43.693Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/054f0b70-56fa-4607-9318-3a97bd70f518
+        - id: 68d4a528-4963-41a3-a69f-63dd6b5bc939
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-13T09:40:01.47Z'
+          dateModified: '2020-01-13T09:40:01.47Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/68d4a528-4963-41a3-a69f-63dd6b5bc939
+        - id: 3ecfcbef-1e66-4ab9-b874-9c742ee99a7e
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-13T06:26:21.33Z'
+          dateModified: '2020-01-13T06:26:21.33Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/3ecfcbef-1e66-4ab9-b874-9c742ee99a7e
+        - id: 3334d254-3e42-4978-971f-d67a302850d4
+          name: dialog engine KB
+          description: Knowledge base for Dialog Engine
+          coreLanguage: en-US
+          dateCreated: '2020-01-21T06:18:49.547Z'
+          dateModified: '2020-01-21T06:18:49.547Z'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/3334d254-3e42-4978-971f-d67a302850d4
+      nextUri: >-
+        api/v2/knowledge/knowledgebases?after=3334d254-3e42-4978-971f-d67a302850d4&limit=null
+    type: object
+    properties:
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/KnowledgeBase'
+      nextUri:
+        type: string
+    required:
+      - entities
+      - nextUri
+  KnowledgebaseRequest:
+    title: KnowledgebaseRequest
+    example:
+      name: dialog engine kb
+      description: 'Knowledge base for Dialog Engine, best one in the world'
+      coreLanguage: en-US
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      coreLanguage:
+        type: string
+    required:
+      - name
+      - description
+      - coreLanguage
+  CreateSingleDocumentRequest:
+    title: CreateSingleDocumentRequest
+    example:
+      type: Faq
+      faq:
+        question: ' When do I receive the hard copy of the offer letter?'
+        answer: >-
+          The hard copy of the offer letter is issued on the day of joining with
+          Genesys. You will be required to attend the HR Orientation post which
+          the offer letter will be issued.
+    type: object
+    properties:
+      type:
+        type: string
+      faq:
+        $ref: '#/definitions/Faq'
+    required:
+      - type
+      - faq
+  KnowledgeBase:
+    title: KnowledgeBase
+    example:
+      id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      name: Genesys HR Joining bot
+      description: FAQs related to Joining formalities at Genesys
+      coreLanguage: en-US
+      dateCreated: '2020-01-23T04:40:45.992Z'
+      dateModified: '2020-01-23T04:40:45.992Z'
+      selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      coreLanguage:
+        type: string
+      dateCreated:
+        type: string
+      dateModified:
+        type: string
+      selfUri:
+        type: string
+    required:
+      - id
+      - name
+      - description
+      - coreLanguage
+      - dateCreated
+      - dateModified
+      - selfUri
+  CreateMulltipleDocumentsRequest:
+    title: CreateMulltipleDocumentsRequest
+    example:
+      type: Faq
+      faq:
+        question: ' When do I receive the hard copy of the offer letter?'
+        answer: >-
+          The hard copy of the offer letter is issued on the day of joining with
+          Genesys. You will be required to attend the HR Orientation post which
+          the offer letter will be issued.
+    type: object
+    properties:
+      type:
+        type: string
+      faq:
+        $ref: '#/definitions/Faq'
+    required:
+      - type
+      - faq
+  Faq:
+    title: Faq
+    example:
+      question: ' When do I receive the hard copy of the offer letter?'
+      answer: >-
+        The hard copy of the offer letter is issued on the day of joining with
+        Genesys. You will be required to attend the HR Orientation post which
+        the offer letter will be issued.
+    type: object
+    properties:
+      question:
+        type: string
+      answer:
+        type: string
+      alternatives:
+        type: array
+        items:
+          type: string
+    required:
+      - question
+      - answer
+  CreateMulltipleDocumentsResponse:
+    title: CreateMulltipleDocumentsResponse
+    example:
+      entities:
+        - id: 270cc8eb-91cc-448f-ab67-63818f4cffdf
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: ' When do I receive the hard copy of the offer letter?'
+            answer: >-
+              The hard copy of the offer letter is issued on the day of joining
+              with Genesys. You will be required to attend the HR Orientation
+              post which the offer letter will be issued.
+            alternatives: []
+          dateCreated: '2020-01-23T05:37:55.482Z'
+          dateModified: '2020-01-23T05:37:55.487Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/270cc8eb-91cc-448f-ab67-63818f4cffdf
+        - id: 4958696b-b752-46bb-accc-ce9ad5a44b1d
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: >-
+              Can I go ahead with the exit formalities on the basis of the offer
+              letter soft copy given to me?
+            answer: >-
+              You can initiate the exit formalities upon receiving the soft copy
+              of your offer letter.  
+            alternatives:
+              - >-
+                Do I need a hard copy of offer letter to initiate exit
+                formalities?
+          dateCreated: '2020-01-23T05:37:55.544Z'
+          dateModified: '2020-01-23T05:37:55.544Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/4958696b-b752-46bb-accc-ce9ad5a44b1d
+        - id: 2daa5c77-cbbb-4297-bcf8-4b801dceac55
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: ' If I am unable to join on the date mentioned in the offer letter, will I receive another letter with my revised date of joining ?'
+            answer: >-
+              It is important you stay connected with the Recruiter / HR SPOC
+              and keep them apprised of any changes in date of joining. The hard
+              copy of the offer letter will have the right DOJ and will be
+              issued post HR orientation on Day One.
+            alternatives:
+              - ' Will my offer letter have new or old date of joining ?'
+          dateCreated: '2020-01-23T05:37:55.582Z'
+          dateModified: '2020-01-23T05:37:55.583Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/2daa5c77-cbbb-4297-bcf8-4b801dceac55
+        - id: 2d17889b-2498-4f8f-b0f7-f4bfe8a8c2a4
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: 'Where and at what time do I report on my date of joining? '
+            answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+            alternatives:
+              - ' Where should I report on date of joining for Mumbai Office ?'
+          dateCreated: '2020-01-23T05:37:55.618Z'
+          dateModified: '2020-01-23T05:37:55.619Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/2d17889b-2498-4f8f-b0f7-f4bfe8a8c2a4
+        - id: c5949801-67ec-4aeb-95a9-81077ffb1a6f
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: Can I join Genesys on any day in the date of joining week ?
+            answer: >-
+              The joining formalities at Genesys takes place only on Monday &
+              Wednesday every week. Therefore, your date of joining can be any
+              one of these days. Please keep your Recruiter / HR informed about
+              this in advance. 
+            alternatives:
+              - ' Can I have my day of joining on a friday ? '
+          dateCreated: '2020-01-23T05:37:55.663Z'
+          dateModified: '2020-01-23T05:37:55.663Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/c5949801-67ec-4aeb-95a9-81077ffb1a6f
+        - id: 469d959a-de31-4a3b-8fa6-f5f5db202f4c
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: What is the Dress Code Policy ?
+            answer: >-
+              We encourage smart business casuals & shoes for men & appropriate
+              footwear for women. The company maintains a professional working
+              environment. All employees should use discretion in wearing attire
+              that is appropriate for the office and when meeting with customers
+              and business contacts. Do not wear anything that other employees
+              might find offensive or that might make co-workers uncomfortable.
+              This includes clothing with profane language statements or
+              clothing that promotes causes that include, but are not limited
+              to, politics, religion, sexuality, race, age, gender, and
+              ethnicity.
+            alternatives:
+              - ' Are flip flops allowed within the dress code policy ? '
+          dateCreated: '2020-01-23T05:37:55.699Z'
+          dateModified: '2020-01-23T05:37:55.699Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/469d959a-de31-4a3b-8fa6-f5f5db202f4c
+        - id: d81379e8-9b1b-46d8-ae24-5e8a986927f9
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: >-
+              What are the documents that I have to bring along on the joining
+              date ?
+            answer: >-
+              You will have to carry the following documents (Xerox and Three
+              sets of photocopies) with you on the date of joining: Three
+              Passport Size Photographs (With White Background), Academic
+              certificates: X standard, XII Standard, Diploma, Under-Graduation,
+              Post-Graduation, Others, Any Other Merit Certificate, Copy of
+              Identity Proof (Passport, Aadhar Card & Pan Card) and Cancelled
+              Cheque Xerox, Resignation acceptance letter/ Relieving Letter from
+              Previous Employer, Experience Certificate from Previous Employers,
+              Certificate of Last Drawn Salary/ Pay Slips. 
+            alternatives:
+              - ' Who academic documents do I need on the date of joining ? '
+          dateCreated: '2020-01-23T05:37:55.733Z'
+          dateModified: '2020-01-23T05:37:55.733Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/d81379e8-9b1b-46d8-ae24-5e8a986927f9
+        - id: 6669c444-acb7-4d86-8492-0b3e7c45c0d7
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: Will Genesys provide accommodation facilities if I am relocating?
+            answer: >-
+              We provide initial accommodation for outstation candidates for a
+              period of one week. This will have to be approved during the offer
+              discussions with your respective HR. Please inform your HR well in
+              advance in case you wish to avail the accommodation facility.
+            alternatives:
+              - ' Will I get accommdation if I am from the same city but live far away ? '
+          dateCreated: '2020-01-23T05:37:55.77Z'
+          dateModified: '2020-01-23T05:37:55.771Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/6669c444-acb7-4d86-8492-0b3e7c45c0d7
+        - id: 490420e7-0144-4ebf-942d-bfbe930292ad
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: >-
+              Is the relieving letter a necessary document on the day of joining
+              ?
+            answer: >-
+              Yes, it is mandatory. In the absence of a relieving letter, you
+              may carry a hard copy of the resignation acceptance email from
+              your previous organization mentioning the last working day
+              approved by the HR. Please ensure that your relieving date from
+              your previous organization is before the date you join Genesys. In
+              case of any problems regarding this, do inform your recruiter at
+              the earliest.  
+            alternatives:
+              - ' Is my resignation letter enough on the day of joining ? '
+          dateCreated: '2020-01-23T05:37:55.807Z'
+          dateModified: '2020-01-23T05:37:55.808Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/490420e7-0144-4ebf-942d-bfbe930292ad
+        - id: 863462f7-269d-44b9-a45f-cad6cde70f70
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: ' Can I transfer the amount from my existing PF account to Genesys account? '
+            answer: >-
+              This can be done once your Genesys Employee ID is active. This
+              will be ready within a couple of days of your joining. Please
+              visit https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+              for more details. A request has to be raised & you need to furnish
+              your existing PF account number to facilitate this. 
+            alternatives:
+              - ' Are PF accounts transferrable from old company to Genesys ? '
+          dateCreated: '2020-01-23T05:37:55.84Z'
+          dateModified: '2020-01-23T05:37:55.841Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/863462f7-269d-44b9-a45f-cad6cde70f70
+        - id: ad52b629-6a86-4b5e-a7bf-7b3a6dfc1078
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: What are the company's official working hours?
+            answer: >-
+              All employees are expected to maintain the established office
+              timings 9.30 am to 6.00 pm (8.5 hours inclusive of lunch hour). An
+              employee who needs to either come in late or leave early due to
+              any reason is required to inform and seek approval of the
+              immediate supervisor at least one day prior to the same.
+            alternatives:
+              - ' Do I need pre approval if I come to work a little later than the working hours ? '
+          dateCreated: '2020-01-23T05:37:55.873Z'
+          dateModified: '2020-01-23T05:37:55.873Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/ad52b629-6a86-4b5e-a7bf-7b3a6dfc1078
+        - id: dd14755e-95b0-423c-80c5-3f2c8611da5a
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: When do I receive ID Cards and Access Cards?
+            answer: >-
+              This can be done once your Genesys Employee ID is active. This
+              will be ready within a couple of days of your joining. Please
+              visit https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+              for more details. A request has to be raised & you need to furnish
+              your existing PF account number to facilitate this. 
+            alternatives:
+              - ' Will my access cards be immediately activated ? '
+          dateCreated: '2020-01-23T05:37:55.907Z'
+          dateModified: '2020-01-23T05:37:55.908Z'
+          categories: []
+          knowledgeBase:
+            id: {KnowledgeBaseID}
+            name: dialog engine kb
+            description: 'Knowledge base for Dialog Engine, best one in the world'
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T05:37:19.001Z'
+            dateModified: '2020-01-23T05:37:43.54Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/{KnowledgeBaseID}/languages/en-US/documents/dd14755e-95b0-423c-80c5-3f2c8611da5a
+    type: object
+    properties:
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/Document'
+    required:
+      - entities
+  UpdateDocumentsRequest:
+    title: UpdateDocumentsRequest
+    example:
+      type: Faq
+      id: 80fce4ce-41ba-4413-afef-b7c7eda4c82a
+      faq:
+        question: ' When do I receive the hard copy of the offer letter?'
+        answer: >-
+          The hard copy of the offer letter is issued on the day of joining with
+          Genesys. You will be required to attend the HR Orientation post which
+          the offer letter will be issued.
+    type: object
+    properties:
+      type:
+        type: string
+      id:
+        type: string
+      faq:
+        $ref: '#/definitions/Faq'
+    required:
+      - type
+      - id
+      - faq
+  GetDocumentResponse:
+    title: GetDocumentResponse
+    example:
+      id: f531422c-39dc-42e7-93df-4f9ba68de0c6
+      languageCode: en-US
+      type: Faq
+      faq:
+        question: what is the rate for the home loan for 15 years?
+        answer: >-
+          the rate for home loan for 10 years can be too high and you might have
+          to shell out double money within 5 years, be careful!!
+        alternatives:
+          - home loan for decade and half
+      dateCreated: '2020-01-23T04:49:46.362Z'
+      dateModified: '2020-01-23T04:49:46.363Z'
+      categories: []
+      knowledgeBase:
+        id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+        name: Genesys HR Joining bot
+        description: FAQs related to Joining formalities at Genesys
+        coreLanguage: en-US
+        dateCreated: '2020-01-23T04:40:45.992Z'
+        dateModified: '2020-01-23T04:40:45.992Z'
+        selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      externalUrl: 'http://test'
+      selfUri: >-
+        /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/f531422c-39dc-42e7-93df-4f9ba68de0c6
+    type: object
+    properties:
+      id:
+        type: string
+      languageCode:
+        type: string
+      type:
+        type: string
+      faq:
+        $ref: '#/definitions/Faq'
+      dateCreated:
+        type: string
+      dateModified:
+        type: string
+      categories:
+        type: array
+        items:
+          type: string
+      knowledgeBase:
+        $ref: '#/definitions/KnowledgeBase'
+      externalUrl:
+        type: string
+      selfUri:
+        type: string
+    required:
+      - id
+      - languageCode
+      - type
+      - faq
+      - dateCreated
+      - dateModified
+      - categories
+      - knowledgeBase
+      - externalUrl
+      - selfUri
+  GetMultipleDocumentsResponse:
+    title: GetMultipleDocumentsResponse
+    example:
+      entities:
+        - id: f531422c-39dc-42e7-93df-4f9ba68de0c6
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: what is the rate for the home loan for 15 years?
+            answer: >-
+              the rate for home loan for 10 years can be too high and you might
+              have to shell out double money within 5 years, be careful!!
+            alternatives:
+              - home loan for decade and half
+          dateCreated: '2020-01-23T04:49:46.362Z'
+          dateModified: '2020-01-23T04:49:46.363Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          externalUrl: 'http://test'
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/f531422c-39dc-42e7-93df-4f9ba68de0c6
+        - id: 80fce4ce-41ba-4413-afef-b7c7eda4c82a
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: Will Genesys provide accommodation facilities if I am relocating?
+            answer: >-
+              We provide initial accommodation for outstation candidates for a
+              period of one week. This will have to be approved during the offer
+              discussions with your respective HR. Please inform your HR well in
+              advance in case you wish to avail the accommodation facility.
+            alternatives:
+              - ' Will I get accommdation if I am from the same city but live far away ? '
+          dateCreated: '2020-01-23T04:45:24.249Z'
+          dateModified: '2020-01-23T04:45:24.249Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/80fce4ce-41ba-4413-afef-b7c7eda4c82a
+        - id: 4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: 'Where and at what time do I report on my date of joining? '
+            answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+            alternatives:
+              - ' Where should I report on date of joining for Mumbai Office ?'
+          dateCreated: '2020-01-23T04:45:24.088Z'
+          dateModified: '2020-01-23T04:45:24.089Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+        - id: 696ea5f4-252b-485e-b8a5-8c0ae0819bb5
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: When do I receive ID Cards and Access Cards?
+            answer: >-
+              This can be done once your Genesys Employee ID is active. This
+              will be ready within a couple of days of your joining. Please
+              visit https://unifiedportal-mem.epfindia.gov.in/memberinterface/ 
+              for more details. A request has to be raised & you need to furnish
+              your existing PF account number to facilitate this. 
+            alternatives:
+              - ' Will my access cards be immediately activated ? '
+          dateCreated: '2020-01-23T04:45:24.388Z'
+          dateModified: '2020-01-23T04:45:24.389Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/696ea5f4-252b-485e-b8a5-8c0ae0819bb5
+        - id: 5119ab61-43cd-4cf1-89dd-2bba78ba0551
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: What is the Dress Code Policy?
+            answer: >-
+              Usually, you dress in a suit on the weekdays and then fridays are
+              casual
+            alternatives:
+              - what are all the dress codes?
+          dateCreated: '2020-01-23T04:44:41.881Z'
+          dateModified: '2020-01-23T04:44:41.902Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/5119ab61-43cd-4cf1-89dd-2bba78ba0551
+        - id: 089c1580-54f1-4d06-bf37-bbdabfbd448a
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: What is the Dress Code Policy ?
+            answer: >-
+              We encourage smart business casuals & shoes for men & appropriate
+              footwear for women. The company maintains a professional working
+              environment. All employees should use discretion in wearing attire
+              that is appropriate for the office and when meeting with customers
+              and business contacts. Do not wear anything that other employees
+              might find offensive or that might make co-workers uncomfortable.
+              This includes clothing with profane language statements or
+              clothing that promotes causes that include, but are not limited
+              to, politics, religion, sexuality, race, age, gender, and
+              ethnicity.
+            alternatives:
+              - ' Are flip flops allowed within the dress code policy ? '
+          dateCreated: '2020-01-23T04:45:24.166Z'
+          dateModified: '2020-01-23T04:45:24.167Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/089c1580-54f1-4d06-bf37-bbdabfbd448a
+        - id: ae09dd43-0db2-4392-a13c-8d73d66e85cf
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: >-
+              What are the documents that I have to bring along on the joining
+              date ?
+            answer: >-
+              You will have to carry the following documents (Xerox and Three
+              sets of photocopies) with you on the date of joining: Three
+              Passport Size Photographs (With White Background), Academic
+              certificates: X standard, XII Standard, Diploma, Under-Graduation,
+              Post-Graduation, Others, Any Other Merit Certificate, Copy of
+              Identity Proof (Passport, Aadhar Card & Pan Card) and Cancelled
+              Cheque Xerox, Resignation acceptance letter/ Relieving Letter from
+              Previous Employer, Experience Certificate from Previous Employers,
+              Certificate of Last Drawn Salary/ Pay Slips. 
+            alternatives:
+              - ' Who academic documents do I need on the date of joining ? '
+          dateCreated: '2020-01-23T04:45:24.212Z'
+          dateModified: '2020-01-23T04:45:24.212Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/ae09dd43-0db2-4392-a13c-8d73d66e85cf
+        - id: ccb06c25-f2af-428c-b72b-5c022c17c874
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: What are the company's official working hours?
+            answer: >-
+              All employees are expected to maintain the established office
+              timings 9.30 am to 6.00 pm (8.5 hours inclusive of lunch hour). An
+              employee who needs to either come in late or leave early due to
+              any reason is required to inform and seek approval of the
+              immediate supervisor at least one day prior to the same.
+            alternatives:
+              - ' Do I need pre approval if I come to work a little later than the working hours ? '
+          dateCreated: '2020-01-23T04:45:24.35Z'
+          dateModified: '2020-01-23T04:45:24.35Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/ccb06c25-f2af-428c-b72b-5c022c17c874
+        - id: 505cfaf9-4a80-4979-998e-238aba48213e
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: >-
+              Is the relieving letter a necessary document on the day of joining
+              ?
+            answer: >-
+              Yes, it is mandatory. In the absence of a relieving letter, you
+              may carry a hard copy of the resignation acceptance email from
+              your previous organization mentioning the last working day
+              approved by the HR. Please ensure that your relieving date from
+              your previous organization is before the date you join Genesys. In
+              case of any problems regarding this, do inform your recruiter at
+              the earliest.  
+            alternatives:
+              - ' Is my resignation letter enough on the day of joining ? '
+          dateCreated: '2020-01-23T04:45:24.281Z'
+          dateModified: '2020-01-23T04:45:24.281Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/505cfaf9-4a80-4979-998e-238aba48213e
+        - id: fc466eed-7fe7-46fb-b064-d07226b864b5
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: Can I join Genesys on any day in the date of joining week ?
+            answer: >-
+              The joining formalities at Genesys takes place only on Monday &
+              Wednesday every week. Therefore, your date of joining can be any
+              one of these days. Please keep your Recruiter / HR informed about
+              this in advance. 
+            alternatives:
+              - ' Can I have my day of joining on a friday ? '
+          dateCreated: '2020-01-23T04:45:24.135Z'
+          dateModified: '2020-01-23T04:45:24.135Z'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            name: Genesys HR Joining bot
+            description: FAQs related to Joining formalities at Genesys
+            coreLanguage: en-US
+            dateCreated: '2020-01-23T04:40:45.992Z'
+            dateModified: '2020-01-23T04:40:45.992Z'
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/fc466eed-7fe7-46fb-b064-d07226b864b5
+      nextUri: >-
+        api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents?after=fc466eed-7fe7-46fb-b064-d07226b864b5&limit=null
+    type: object
+    properties:
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/Document'
+      nextUri:
+        type: string
+    required:
+      - entities
+      - nextUri
+  Document:
+    title: Document
+    example:
+      id: f531422c-39dc-42e7-93df-4f9ba68de0c6
+      languageCode: en-US
+      type: Faq
+      faq:
+        question: what is the rate for the home loan for 15 years?
+        answer: >-
+          the rate for home loan for 10 years can be too high and you might have
+          to shell out double money within 5 years, be careful!!
+        alternatives:
+          - home loan for decade and half
+      dateCreated: '2020-01-23T04:49:46.362Z'
+      dateModified: '2020-01-23T04:49:46.363Z'
+      categories: []
+      knowledgeBase:
+        id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+        name: Genesys HR Joining bot
+        description: FAQs related to Joining formalities at Genesys
+        coreLanguage: en-US
+        dateCreated: '2020-01-23T04:40:45.992Z'
+        dateModified: '2020-01-23T04:40:45.992Z'
+        selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      externalUrl: 'http://test'
+      selfUri: >-
+        /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/f531422c-39dc-42e7-93df-4f9ba68de0c6
+    type: object
+    properties:
+      id:
+        type: string
+      languageCode:
+        type: string
+      type:
+        type: string
+      faq:
+        $ref: '#/definitions/Faq'
+      dateCreated:
+        type: string
+      dateModified:
+        type: string
+      categories:
+        type: array
+        items:
+          type: string
+      knowledgeBase:
+        $ref: '#/definitions/KnowledgeBase'
+      externalUrl:
+        type: string
+      selfUri:
+        type: string
+    required:
+      - id
+      - languageCode
+      - type
+      - faq
+      - dateCreated
+      - dateModified
+      - categories
+      - knowledgeBase
+      - selfUri
+  TrainKnowledgeBaseResponse:
+    title: TrainKnowledgeBaseResponse
+    example:
+      id: e9034402-6ce3-4e07-a3d7-35dccde9342c
+      dateTriggered: '2020-01-23T05:13:48.313Z'
+      status: Queued
+      languageCode: en-US
+      knowledgeBase:
+        id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+        selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      errorMessage: ''
+      knowledgeDocumentsState: Draft
+      selfUri: >-
+        /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/trainings/e9034402-6ce3-4e07-a3d7-35dccde9342c
+    type: object
+    properties:
+      id:
+        type: string
+      dateTriggered:
+        type: string
+      status:
+        type: string
+      languageCode:
+        type: string
+      knowledgeBase:
+        $ref: '#/definitions/KnowledgeBaseId'
+      errorMessage:
+        type: string
+      knowledgeDocumentsState:
+        type: string
+      selfUri:
+        type: string
+    required:
+      - id
+      - dateTriggered
+      - status
+      - languageCode
+      - knowledgeBase
+      - errorMessage
+      - knowledgeDocumentsState
+      - selfUri
+  KnowledgeBaseId:
+    title: KnowledgeBaseId
+    example:
+      id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+    type: object
+    properties:
+      id:
+        type: string
+      selfUri:
+        type: string
+    required:
+      - id
+      - selfUri
+  GettrainingInformationResponse:
+    title: GettrainingInformationResponse
+    example:
+      id: e9034402-6ce3-4e07-a3d7-35dccde9342c
+      dateTriggered: '2020-01-23T05:13:48.313Z'
+      dateCompleted: '2020-01-23T05:19:48.313Z'
+      status: Succeeded
+      languageCode: en-US
+      knowledgeBase:
+        id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+        selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      errorMessage: ''
+      knowledgeDocumentsState: Draft
+      selfUri: >-
+        /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/trainings/e9034402-6ce3-4e07-a3d7-35dccde9342c
+    type: object
+    properties:
+      id:
+        type: string
+      dateTriggered:
+        type: string
+      dateCompleted:
+        type: string
+      status:
+        type: string
+      languageCode:
+        type: string
+      knowledgeBase:
+        $ref: '#/definitions/KnowledgeBaseId'
+      errorMessage:
+        type: string
+      knowledgeDocumentsState:
+        type: string
+      selfUri:
+        type: string
+    required:
+      - id
+      - dateTriggered
+      - dateCompleted
+      - status
+      - languageCode
+      - knowledgeBase
+      - errorMessage
+      - knowledgeDocumentsState
+      - selfUri
+  GetListoftrainingsInformationResponse:
+    title: GetListoftrainingsInformationResponse
+    example:
+      entities:
+        - id: e9034402-6ce3-4e07-a3d7-35dccde9342c
+          dateTriggered: '2020-01-23T05:13:48.313Z'
+          dateCompleted: '2020-01-23T05:24:30.426Z'
+          status: Succeeded
+          languageCode: en-US
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          errorMessage: ''
+          knowledgeDocumentsState: Draft
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/trainings/e9034402-6ce3-4e07-a3d7-35dccde9342c
+    type: object
+    properties:
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/GettrainingInformationResponse'
+    required:
+      - entities
+  KnowledgeSearchRequest:
+    title: KnowledgeSearchRequest
+    example:
+      query: joining
+      pageSize: 4
+      pageNumber: 1
+      languageCode: en-US
+      documentType: Faq
+      searchOnDraftDocuments: 'True'
+    type: object
+    properties:
+      query:
+        type: string
+      pageSize:
+        type: integer
+        format: int32
+      pageNumber:
+        type: integer
+        format: int32
+      languageCode:
+        type: string
+      documentType:
+        type: string
+      searchOnDraftDocuments:
+        type: boolean
+    required:
+      - query
+      - pageSize
+      - pageNumber
+      - languageCode
+      - documentType
+      - searchOnDraftDocuments
+  KnowledgeSearchResponse:
+    title: KnowledgeSearchResponse
+    example:
+      total: 4
+      pageCount: 1
+      pageSize: 4
+      pageNumber: 1
+      searchId: 8a14c3d60a364e83bc7cee091c59cd5a
+      results:
+        - id: fc466eed-7fe7-46fb-b064-d07226b864b5
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: Can I join Genesys on any day in the date of joining week ?
+            answer: >-
+              The joining formalities at Genesys takes place only on Monday &
+              Wednesday every week. Therefore, your date of joining can be any
+              one of these days. Please keep your Recruiter / HR informed about
+              this in advance. 
+            alternatives:
+              - ' Can I have my day of joining on a friday ? '
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          externalUrl: 'null'
+          confidence: 0.4579619926816063
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/fc466eed-7fe7-46fb-b064-d07226b864b5
+        - id: 80fce4ce-41ba-4413-afef-b7c7eda4c82a
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: ' When do I receive the hard copy letter?'
+            answer: >-
+              The hard copy of the offer letter is issued on the day of joining
+              with Genesys. You will be required to attend the HR Orientation
+              post which the offer letter will be issued.
+            alternatives: []
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          externalUrl: 'null'
+          confidence: 0.16002965474022351
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/80fce4ce-41ba-4413-afef-b7c7eda4c82a
+        - id: 6b64181c-5370-4c95-8980-5232708eb76e
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: ' If I am unable to join on the date mentioned in the offer letter, will I receive another letter with my revised date of joining ?'
+            answer: >-
+              It is important you stay connected with the Recruiter / HR SPOC
+              and keep them apprised of any changes in date of joining. The hard
+              copy of the offer letter will have the right DOJ and will be
+              issued post HR orientation on Day One.
+            alternatives:
+              - ' Will my offer letter have new or old date of joining ?'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          externalUrl: 'null'
+          confidence: 0.14720733916679613
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/6b64181c-5370-4c95-8980-5232708eb76e
+        - id: 4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+          languageCode: en-US
+          type: Faq
+          faq:
+            question: 'Where and at what time do I report on my date of joining? '
+            answer: ' For candidates joining in Chennai, Bangalore, Mumbai ,Gurgaon  the reporting venue on day one will be as below: Genesys Telecom Labs India Private Limited,SP Infocity, 4th Floor, Block C, No 40.MGR Salai, Kandanchavadi, Perungudi Chennai  600096. For candidates joining in Hyderabad the reporting venue on day one will be as below: 1st Floor, Shantha Sriram Tech Park,Adjacent DLF, Cyber City,Gachibowli, Hyderabad,Telangana 500032. Reporting time: 10.00 AM '
+            alternatives:
+              - ' Where should I report on date of joining for Mumbai Office ?'
+          categories: []
+          knowledgeBase:
+            id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+            selfUri: >-
+              /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+          externalUrl: 'null'
+          confidence: 0.13316497521679543
+          selfUri: >-
+            /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/4a28e3a0-dda6-4a37-bd87-b32b8e74c49e
+    type: object
+    properties:
+      total:
+        type: integer
+        format: int32
+      pageCount:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      pageNumber:
+        type: integer
+        format: int32
+      searchId:
+        type: string
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Result'
+    required:
+      - total
+      - pageCount
+      - pageSize
+      - pageNumber
+      - searchId
+      - results
+  Result:
+    title: Result
+    example:
+      id: fc466eed-7fe7-46fb-b064-d07226b864b5
+      languageCode: en-US
+      type: Faq
+      faq:
+        question: Can I join Genesys on any day in the date of joining week ?
+        answer: >-
+          The joining formalities at Genesys takes place only on Monday &
+          Wednesday every week. Therefore, your date of joining can be any one
+          of these days. Please keep your Recruiter / HR informed about this in
+          advance. 
+        alternatives:
+          - ' Can I have my day of joining on a friday ? '
+      categories: []
+      knowledgeBase:
+        id: 02cc4d46-0e6e-45e2-8200-d0998646fc8a
+        selfUri: /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a
+      externalUrl: 'null'
+      confidence: 0.4579619926816063
+      selfUri: >-
+        /api/v2/knowledge/knowledgebases/02cc4d46-0e6e-45e2-8200-d0998646fc8a/languages/en-US/documents/fc466eed-7fe7-46fb-b064-d07226b864b5
+    type: object
+    properties:
+      id:
+        type: string
+      languageCode:
+        type: string
+      type:
+        type: string
+      faq:
+        $ref: '#/definitions/Faq'
+      categories:
+        type: array
+        items:
+          type: string
+      knowledgeBase:
+        $ref: '#/definitions/KnowledgeBaseId'
+      externalUrl:
+        type: string
+      confidence:
+        type: number
+        format: double
+      selfUri:
+        type: string
+    required:
+      - id
+      - languageCode
+      - type
+      - faq
+      - categories
+      - knowledgeBase
+      - externalUrl
+      - confidence
+      - selfUri
+security:
+  - auth: []
+tags:
+  - name: authentication
+    description: ''
+  - name: knowledgebase
+  - name: documents
+  - name: train
+    description: ''

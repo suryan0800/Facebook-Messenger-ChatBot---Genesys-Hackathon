@@ -1,0 +1,24 @@
+1.Install POSTMAN tool from here which is collaboration platform for API development.
+2. Open POSTMAN and complete the sign up process. (You could use your google account for quick login).
+3.Log into POSTMAN using your credentials and perform the following steps.
+Under File menu option, click Import.
+Please import the attached KSS environment.postman_environment file and KSS.postman_collection file
+Navigate to “Collections” tab -> you could see KSS Collection in your postman
+And in the right top corner, select “KSS environment” from the drop down filed and click the “eye” icon to view the variables
+Edit the environment and modify the “orgId” parameter value.   Ie., replace the “provided_org_id” with the above provided organization id.
+At this stage, the environment is ready for API execution. 
+KSS collection is organized with folders and each folder consists of KSS requests in order.
+Note: Execute the Delete Knowledge base request at the last
+In every request, the description is added for easy understanding.  You can see the description by clicking the arrow icon left to the Request name on the request window.
+ Please use the following order of execution: 
+Generate access token.  Initially the environment variable “access_token” is assigned to null but will be assigned the token after execution of this request.
+                Go to “Authentication” folder:                                Click on “POST Generate access token”                                                You can see the description – “Using Client Id and Client secret, generate access token and use it for Authentication in all request headers.”                                                               Click “Send” button to initiate the request.  You will be able to see the 200 OK response in the same window below the request description and you can see the new token value in the environment variable “access_token”.                                                               NOTE:  Before clicking “Send” button, you may have to fill certain fields.  In this case, you need to fill “Username” and “Password” under “Authorization”.                                                                Fill the given “Client ID” in the “Username” field                                                                                       “Client Secret” in the “Password” field. 
+Create KnowledgeBase.  Initially the environment variable “kbId” is assigned to null but will be assigned to newly generated id after execution of this request.
+Go to “kbs” folder:                Click on “POST Create KnowledgeBase” and make sure you the kbid is generated. In the similar approach, follow the below steps
+Create Document.  (under folder “documents” -> POST Create Document)
+Train Model (under folder “train_search” -> POST Train a Model”
+Search (under folder “train_search” -> POST Search)
+  To access the NER API: Swagger URL: https://piiapi.genesysappliedresearch.com/docAccess token: fa8c712dd1104d5493655f78fad40868 
+Open the above mentioned swagger URL
+Extend the Request and click Try it out button
+Enter the above mentioned access token in the Bearer Access Token field
